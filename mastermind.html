@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zdieľaný kalendár</title>
+</head>
+<body>
+    <h1>Zadajte odkaz na váš zdieľaný kalendár:</h1>
+    <input type="text" id="calendarLink" />
+    <button onclick="showCalendar()">Zobraziť kalendár</button>
+    <div id="calendarContainer"></div>
+
+    <script>
+        function showCalendar() {
+            const calendarLink = document.getElementById('calendarLink').value;
+            const calendarContainer = document.getElementById('calendarContainer');
+
+            // Vytváranie iframe elementu pre zobrazenie kalendára
+            const iframe = document.createElement('iframe');
+            iframe.src = calendarLink;
+            iframe.width = '800';
+            iframe.height = '600';
+            iframe.style.border = 'none';
+
+            // Odstránenie starého iframe, ak už existuje
+            while (calendarContainer.firstChild) {
+                calendarContainer.removeChild(calendarContainer.firstChild);
+            }
+
+            // Pridanie novej iframe s kalendárom do kontajnera
+            calendarContainer.appendChild(iframe);
+        }
+    </script>
+</body>
+</html>
