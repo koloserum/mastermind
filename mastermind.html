@@ -1,33 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Zdieľaný kalendár</title>
+    <title>Zdieľaný kalendár a online stretnutie</title>
 </head>
 <body>
     <h1>Zadajte odkaz na váš zdieľaný kalendár:</h1>
     <input type="text" id="calendarLink" />
     <button onclick="showCalendar()">Zobraziť kalendár</button>
+    <button onclick="clearCalendar()">X</button>
     <div id="calendarContainer"></div>
+    <p>https://calendly.com/matejhrica</p>
+
+    <h1>Zadajte odkaz na online stretnutie (Zoom):</h1>
+    <input type="text" id="zoomLink" />
+    <button onclick="showZoom()">Zobraziť stretnutie</button>
+    <button onclick="clearZoom()">X</button>
+    <div id="zoomContainer"></div>
+                  <p>https://us04web.zoom.us/j/77988812267?pwd=CbW5C2Ugd1nsLqPAXszBHnatNN4kVS.1</p>
+
+
+    <h1>Zadajte odkaz na Google formulár:</h1>
+    <input type="text" id="formLink" />
+    <button onclick="showForm()">Zobraziť formulár</button>
+    <button onclick="clearForm()">X</button>
+    <div id="formContainer"></div>
+            <p>https://docs.google.com/forms/d/e/1FAIpQLSfpW5CX2B-sTnWlLqsCRvccZILOpClCJWZJRaPTqiGYUJG1Mg/viewform?usp=sf_link</p>
+
 
     <script>
         function showCalendar() {
             const calendarLink = document.getElementById('calendarLink').value;
             const calendarContainer = document.getElementById('calendarContainer');
 
-            // Vytváranie iframe elementu pre zobrazenie kalendára
             const iframe = document.createElement('iframe');
             iframe.src = calendarLink;
             iframe.width = '800';
             iframe.height = '600';
             iframe.style.border = 'none';
 
-            // Odstránenie starého iframe, ak už existuje
             while (calendarContainer.firstChild) {
                 calendarContainer.removeChild(calendarContainer.firstChild);
             }
 
-            // Pridanie novej iframe s kalendárom do kontajnera
             calendarContainer.appendChild(iframe);
+        }
+
+        function showZoom() {
+            const zoomLink = document.getElementById('zoomLink').value;
+            const zoomContainer = document.getElementById('zoomContainer');
+
+            const iframe = document.createElement('iframe');
+            iframe.src = zoomLink;
+            iframe.width = '800';
+            iframe.height = '600';
+            iframe.style.border = 'none';
+
+            while (zoomContainer.firstChild) {
+                zoomContainer.removeChild(zoomContainer.firstChild);
+            }
+
+            zoomContainer.appendChild(iframe);
+        }
+
+        function showForm() {
+            const formLink = document.getElementById('formLink').value;
+            const formContainer = document.getElementById('formContainer');
+
+            if (formLink.includes('docs.google.com/forms/')) {
+                const iframe = document.createElement('iframe');
+                iframe.src = formLink;
+                iframe.width = '800';
+                iframe.height = '600';
+                iframe.allow = 'autoplay';
+                iframe.style.border = 'none';
+
+                while (formContainer.firstChild) {
+                    formContainer.removeChild(formContainer.firstChild);
+                }
+
+                formContainer.appendChild(iframe);
+            } else {
+                alert('Zadali ste neplatný odkaz na Google formulár.');
+            }
+        }
+
+        function clearCalendar() {
+            document.getElementById('calendarLink').value = '';
+            const calendarContainer = document.getElementById('calendarContainer');
+            while (calendarContainer.firstChild) {
+                calendarContainer.removeChild(calendarContainer.firstChild);
+            }
+        }
+
+        function clearZoom() {
+            document.getElementById('zoomLink').value = '';
+            const zoomContainer = document.getElementById('zoomContainer');
+            while (zoomContainer.firstChild) {
+                zoomContainer.removeChild(zoomContainer.firstChild);
+            }
+        }
+
+        function clearForm() {
+            document.getElementById('formLink').value = '';
+            const formContainer = document.getElementById('formContainer');
+            while (formContainer.firstChild) {
+                formContainer.removeChild(formContainer.firstChild);
+            }
         }
     </script>
 </body>
